@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MusicPlayerApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MusicPlayerApp.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <Shell.TabBarBackgroundColor>#2d2e37</Shell.TabBarBackgroundColor>
+    <Shell.TabBarTitleColor>White</Shell.TabBarTitleColor>
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginView}"
+        Route="LoginPage"/>
+
+    <TabBar>
+        <ShellContent 
+            Title="Home"      
+            Icon="ic_home.png"
+            Route="Home" 
+            ContentTemplate="{DataTemplate views:HomeView}"/>
+        <ShellContent
+            Title="Playlists"
+            Icon="ic_playlist.png"
+            Route="Playlists"
+            ContentTemplate="{DataTemplate views:HomeView}"/>
+        <ShellContent
+            Title="New Releases"
+            Icon="ic_newrelease.png"
+            Route="NewReleases"
+            ContentTemplate="{DataTemplate views:HomeView}"/>
+    </TabBar>
+</Shell>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+             xmlns:vm="clr-namespace:MusicPlayerApp.ViewModels"
+             xmlns:converters="clr-namespace:MusicPlayerApp.Converters"
+             x:Class="MusicPlayerApp.Views.ArtistView"
+             x:DataType="vm:ArtistViewModel"
+             Title="{Binding Name}"
+             BackgroundColor="#2d2e37">
+    
+    <mvvm:TinyView.Resources>
+        <converters:ViewToColumnWidthConverter x:Key="ToColumnWidth" NumberOfColumns="2" Deducation="40"/>
+    </mvvm:TinyView.Resources>
+    
+    <Grid x:Name="MainContent">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+
+        <CollectionView IsVisible="{Binding IsNotBusy}" 
+                        ItemsSource="{Binding Albums}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" 
+                                 Span="2" 
+                                 VerticalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.Header>
+
+                <VerticalStackLayout>
+                    <Grid HeightRequest="400" 
+                          HorizontalOptions="Fill">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.9*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame Grid.Row="0"
+                               CornerRadius="200"
+                               HorizontalOptions="Center"
+                               IsClippedToBounds="True"
+                               Padding="0"
+                               BorderColor="#2d2e37"
+                               Margin="0">
+                            <Image Aspect="AspectFill" 
+                               Source="{Binding TopImage}"/>
+                        </Frame>
+                        <ContentView Grid.Row="1"
+                                     Padding="10" 
+                                     BackgroundColor="#AA000000"
+                                     VerticalOptions="End">
+                            <Label Text="{Binding Followers, StringFormat='{0:N0} Followers'}"
+                                   TextColor="White" FontFamily="Rubik"/>
+                        </ContentView>
+
+                    </Grid>
+                    <Label Margin="10, 10, 10, 0" Text="Albums" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+
+            </CollectionView.Header>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SearchItemViewModel">
+                    <VerticalStackLayout Padding="10">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                               Aspect="AspectFill" 
+                               HorizontalOptions="Start"
+                               HeightRequest="{Binding Source={x:Reference MainContent}, Path=., Converter={StaticResource ToColumnWidth}}"
+                               WidthRequest="{Binding Source={x:Reference MainContent}, Path=., Converter={StaticResource ToColumnWidth}}"/>
+                        <Label Text="{Binding Title}" TextColor="White" FontFamily="Rubik"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+    </Grid>
+</mvvm:TinyView>

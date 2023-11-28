@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+             xmlns:vm="clr-namespace:MusicPlayerApp.ViewModels"
+             x:Class="MusicPlayerApp.Views.AlbumView"
+             x:DataType="vm:AlbumViewModel"
+             Title="{Binding Name}"
+             BackgroundColor="#2d2e37">
+
+    <Grid>
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+
+        <CollectionView IsVisible="{Binding IsNotBusy}"
+                        ItemsSource="{Binding Tracks}">
+
+            <CollectionView.Header>
+
+                <VerticalStackLayout>
+                    <Grid HeightRequest="400"
+                          HorizontalOptions="Fill">
+
+                        <Image Aspect="AspectFill"
+                               Source="{Binding TopImage}"/>
+                        <ContentView Padding="10" 
+                                     BackgroundColor="#AA000000"
+                                     VerticalOptions="End">
+                            <Label TextColor="White" FontFamily="Rubik">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Release date: "/>
+                                        <Span Text="{Binding ReleaseDate}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </ContentView>
+                        
+                    </Grid>
+                    <Label Margin="10" Text="Tracks" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+                
+            </CollectionView.Header>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SearchItemViewModel">
+                    <HorizontalStackLayout Spacing="10" Padding="10,0,0,10">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                                       WidthRequest="35"
+                                       HeightRequest="35"
+                                       Aspect="AspectFill">
+                        </Image>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" TextColor="White" FontSize="Header" FontFamily="Rubik" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding SubTitle}" TextColor="White" FontSize="Caption" FontFamily="Rubik" VerticalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+                        
+    </Grid>
+</mvvm:TinyView>
