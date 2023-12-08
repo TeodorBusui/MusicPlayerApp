@@ -59,6 +59,7 @@
 	  <None Remove="Resources\Images\ic_newrelease.svg" />
 	  <None Remove="Resources\Images\ic_playlist.svg" />
 	  <None Remove="Resources\Images\login.jpg" />
+	  <None Remove="Resources\Images\melodify_high_resolution_logo.svg" />
 	  <None Remove="Resources\Images\music-svgrepo-com.svg" />
 	</ItemGroup>
 

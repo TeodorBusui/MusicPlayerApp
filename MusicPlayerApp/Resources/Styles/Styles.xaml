@@ -7,6 +7,9 @@
     <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}"/>
         <Setter Property="TextColor" Value="{StaticResource AccentTextColor}"/>
+        <Setter Property="FontFamily" Value="Rubik"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BorderColor" Value="White"/>
     </Style>
 
 </ResourceDictionary>

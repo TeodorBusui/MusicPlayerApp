@@ -6,16 +6,37 @@
              x:Class="MusicPlayerApp.Views.LoginView"
              x:DataType="vm:LoginViewModel"
              Shell.NavBarIsVisible="False"
-             Title="Login">
+             Title="Login"
+             BackgroundColor="Black">
     <Grid>
-        <Image Source="login.jpg" Aspect="AspectFill"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
 
-        <Button Text="Login to Spotify"
+        <Image Grid.Row="0" 
+               Source="melodify_high_resolution_logo.png" 
+               Aspect="AspectFit" 
+               Scale="1.5"
+               HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <Button Grid.Row="1"
+                Text="Login"
                 Command="{Binding OpenLoginCommand}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                BorderWidth="3"
+                BorderColor="White"
+                CornerRadius="20"
+                HeightRequest="45"
+                WidthRequest="170"/>
 
-        <Frame x:Name="Login" IsVisible="False" CornerRadius="10" BorderColor="Black" Padding="0">
+        <Frame Grid.Row="0"
+               x:Name="Login"
+               IsVisible="False" 
+               CornerRadius="10" 
+               BorderColor="Black" 
+               Padding="0">
             <WebView x:Name="LoginWeb"/>
         </Frame>
     </Grid>
