@@ -9,7 +9,7 @@
         Task<Artist> GetArtist(string id);
         Task<Album> GetAlbum(string id);
         Task<Albums> GetAlbums(string artistId);
-        Task<Albums> GetNewReleases();
+        Task<SearchResult> GetNewReleases();
         Task<Tracks> GetAlbumTracks(string albumId);
     }
 }

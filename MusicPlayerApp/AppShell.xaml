@@ -29,6 +29,6 @@
             Title="New Releases"
             Icon="ic_newrelease.png"
             Route="NewReleases"
-            ContentTemplate="{DataTemplate views:HomeView}"/>
+            ContentTemplate="{DataTemplate views:NewReleasesView}"/>
     </TabBar>
 </Shell>

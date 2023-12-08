@@ -46,11 +46,13 @@ public static class MauiProgram
         builder.Services.AddTransient<HomeViewModel>();
 		builder.Services.AddTransient<ArtistViewModel>();
 		builder.Services.AddTransient<AlbumViewModel>();
+		builder.Services.AddTransient<NewReleasesViewModel>();
 
 		builder.Services.AddTransient<LoginView>();
 		builder.Services.AddTransient<HomeView>();
 		builder.Services.AddTransient<ArtistView>();
 		builder.Services.AddTransient<AlbumView>();
+		builder.Services.AddTransient<NewReleasesView>();
 
         builder.Services.AddSingleton<ISpotifyService, SpotifyService>();
 		builder.Services.AddSingleton<ISecureStorageService, SecureStorageService>();

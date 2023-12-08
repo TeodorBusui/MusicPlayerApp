@@ -88,11 +88,11 @@
             return Get<Albums>(url);
         }
 
-        public Task<Albums> GetNewReleases()
+        public Task<SearchResult> GetNewReleases()
         {
-            var url = $"browse/new-releases";
+            var url = "browse/new-releases";
 
-            return Get<Albums>(url);
+            return Get<SearchResult>(url);
         }
 
         public Task<Tracks> GetAlbumTracks(string albumId)
