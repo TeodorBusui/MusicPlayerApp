@@ -19,12 +19,11 @@ namespace MusicPlayerApp.ViewModels
 
         private async void InitializeAsync()
         {
-            Albums = await NewReleasesData();
+            await NewReleasesData();
         }
 
-        private async Task<ObservableCollection<SearchItemViewModel>> NewReleasesData()
+        private async Task NewReleasesData()
         {
-            ObservableCollection<SearchItemViewModel> NewAlbumsReleased = new();
 
             try
             {
@@ -45,7 +44,7 @@ namespace MusicPlayerApp.ViewModels
                     TapCommand = NavigateToAlbumCommand,
                 });
 
-                NewAlbumsReleased = new(albumResult);
+                Albums = new ObservableCollection<SearchItemViewModel>(albumResult);
             }
             catch(Exception ex) 
             { 
@@ -53,8 +52,6 @@ namespace MusicPlayerApp.ViewModels
             }
 
             IsBusy = false;
-
-            return NewAlbumsReleased;
         }
 
         [ObservableProperty]

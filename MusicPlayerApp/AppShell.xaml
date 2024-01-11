@@ -16,6 +16,11 @@
 
     <TabBar>
         <ShellContent 
+            Title="Favorites"   
+            Icon="ic_favorites.png"
+            Route="Favorites"
+            ContentTemplate="{DataTemplate views:FavoritesView}"/>
+        <ShellContent 
             Title="Home"      
             Icon="ic_home.png"
             Route="Home" 
@@ -24,7 +29,7 @@
             Title="Playlists"
             Icon="ic_playlist.png"
             Route="Playlists"
-            ContentTemplate="{DataTemplate views:HomeView}"/>
+            ContentTemplate="{DataTemplate views:LoginView}"/>
         <ShellContent
             Title="New Releases"
             Icon="ic_newrelease.png"

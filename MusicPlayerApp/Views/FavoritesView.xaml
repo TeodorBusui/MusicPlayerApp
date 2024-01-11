@@ -5,13 +5,12 @@
              xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
              xmlns:behaviors="clr-namespace:MusicPlayerApp.Behaviors"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="MusicPlayerApp.Views.HomeView"
-             Title="Home"
-             x:DataType="vm:HomeViewModel"
+             x:Class="MusicPlayerApp.Views.FavoritesView"
+             Title="Favorites"
+             x:DataType="vm:FavoritesViewModel"
              x:Name="ThisPage"
              BackgroundColor="#2d2e37">
     <mvvm:TinyView.Resources>
-        <toolkit:InvertedBoolConverter x:Key="InvertBool"/>
         <DataTemplate x:Key="ItemTemplate" x:DataType="vm:SearchItemViewModel">
             <VerticalStackLayout Padding="0,0,10,0">
                 <VerticalStackLayout.GestureRecognizers>
@@ -28,42 +27,27 @@
         </DataTemplate>
     </mvvm:TinyView.Resources>
 
-    <Shell.TitleView>
-
-            <SearchBar IsVisible="{Binding IsSearching}"
-                   CancelButtonColor="{StaticResource AccentTextColor}"
-                   TextColor="{StaticResource AccentTextColor}"
-                   Text="{Binding SearchText}"
-                   SearchCommand="{Binding SearchCommand}">
-                <SearchBar.Behaviors>
-                    <behaviors:FocusBehavior BindingContext="{Binding Source={x:Reference ThisPage}, Path=BindingContext}"
-                                         IsFocused="{Binding IsSearching}"/>
-                </SearchBar.Behaviors>
-            </SearchBar>
-
-    </Shell.TitleView>
-
     <Grid Padding="10">
         <ActivityIndicator IsRunning="{Binding IsBusy}" 
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-        
+
         <ScrollView IsVisible="{Binding IsNotBusy}">
             <VerticalStackLayout Spacing="10" IsVisible="{Binding HasResult}">
-                
-                <Label Text="Artists" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
+
+                <Label Text="Favorite Artists" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
                 <CollectionView ItemsSource="{Binding Artists}"
                                 ItemsLayout="HorizontalList"
                                 ItemTemplate="{StaticResource ItemTemplate}">
                 </CollectionView>
 
-                <Label Text="Albums" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
+                <Label Text="Favorite Albums" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
                 <CollectionView ItemsSource="{Binding Albums}" 
                                 ItemsLayout="HorizontalList"
                                 ItemTemplate="{StaticResource ItemTemplate}">
                 </CollectionView>
 
-                <Label Text="Tracks" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
+                <Label Text="Favorite Tracks" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold"/>
                 <CollectionView ItemsSource="{Binding Tracks}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:SearchItemViewModel">
@@ -84,17 +68,6 @@
 
             </VerticalStackLayout>
         </ScrollView>
-        
-        <VerticalStackLayout>
 
-            <SearchBar IsVisible="{Binding IsSearching, Converter={StaticResource InvertBool}}">
-                <SearchBar.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="Focused"
-                                                Command="{Binding StartSearchCommand}"/>
-                </SearchBar.Behaviors>
-            </SearchBar>
-
-        </VerticalStackLayout>
-        
     </Grid>
 </mvvm:TinyView>

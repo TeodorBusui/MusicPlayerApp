@@ -55,7 +55,7 @@
         private string topImage, name;
 
         [ObservableProperty]
-        private int followers;
+        private double followers;
 
         [ObservableProperty]
         private ObservableCollection<SearchItemViewModel> albums = new();

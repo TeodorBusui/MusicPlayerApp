@@ -49,9 +49,9 @@ public partial class LoginView
     {
         if(e.PropertyName == nameof(loginViewModel.ShowLogin)) 
         {
-            var scopes = "playlist-read-private playlist-modify-private";
+            var scopes = "playlist-read-private playlist-modify-private user-follow-read user-library-read";
 
-            var querystring = $"response_type=code&client_id={Constants.SpotifyClientId}&scopes={WebUtility.UrlEncode(scopes)}&redirect_uri={Constants.RedirectUrl}&state={state}";
+            var querystring = $"response_type=code&client_id={Constants.SpotifyClientId}&scope={WebUtility.UrlEncode(scopes)}&redirect_uri={Constants.RedirectUrl}&state={state}";
 
             LoginWeb.Source = $"https://accounts.spotify.com/authorize?{querystring}";
 

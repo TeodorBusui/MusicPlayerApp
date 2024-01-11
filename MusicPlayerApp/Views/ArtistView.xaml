@@ -6,14 +6,40 @@
              xmlns:converters="clr-namespace:MusicPlayerApp.Converters"
              x:Class="MusicPlayerApp.Views.ArtistView"
              x:DataType="vm:ArtistViewModel"
-             Title="{Binding Name}"
-             BackgroundColor="#2d2e37">
-    
+             BackgroundColor="#2d2e37"
+             Title="{Binding Name}">
+
     <mvvm:TinyView.Resources>
         <converters:ViewToColumnWidthConverter x:Key="ToColumnWidth" NumberOfColumns="2" Deducation="40"/>
     </mvvm:TinyView.Resources>
-    
+
+    <mvvm:TinyView.ToolbarItems>
+        <ToolbarItem Text="Actions" Order="Primary" Priority="0" Clicked="OpenActions" />
+    </mvvm:TinyView.ToolbarItems>
+
     <Grid x:Name="MainContent">
+
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="Transparent" CornerRadius="10" Padding="10">
+            <StackLayout VerticalOptions="Center" Spacing="20">
+                <Button Background="White"
+                        Text="Add to favorites"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                <Button Background="White"
+                        Text="Remove from favorites"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
         <ActivityIndicator IsRunning="{Binding IsBusy}" 
                            HorizontalOptions="Center" 
                            VerticalOptions="Center"/>

@@ -55,6 +55,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Rubik-SemiBold.ttf" />
+	  <None Remove="Resources\Images\ic_favorites.svg" />
 	  <None Remove="Resources\Images\ic_home.svg" />
 	  <None Remove="Resources\Images\ic_newrelease.svg" />
 	  <None Remove="Resources\Images\ic_playlist.svg" />
@@ -74,6 +75,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ArtistView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FavoritesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeView.xaml">

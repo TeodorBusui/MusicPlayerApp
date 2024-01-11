@@ -74,6 +74,13 @@
             return Get<Artist>(url);
         }
 
+        public Task<SearchResult> GetFavoriteArtists()
+        {
+            var url = "me/following?type=artist";
+
+            return Get<SearchResult>(url);
+        }
+
         public Task<Album> GetAlbum(string id) 
         { 
             var url = $"albums/{id}";
@@ -88,6 +95,13 @@
             return Get<Albums>(url);
         }
 
+        public Task<FavoriteAlbumsResult> GetFavoriteAlbums()
+        {
+            var url = "me/albums";
+
+            return Get<FavoriteAlbumsResult>(url);
+        }
+
         public Task<SearchResult> GetNewReleases()
         {
             var url = "browse/new-releases";
@@ -100,6 +114,13 @@
             var url = $"albums/{albumId}/tracks";
 
             return Get<Tracks>(url);
+        }
+
+        public Task<FavoriteTracksResult> GetFavoriteTracks()
+        {
+            var url = "me/tracks";
+
+            return Get<FavoriteTracksResult>(url);
         }
 
         private int retryCount = 0;

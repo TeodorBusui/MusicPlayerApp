@@ -137,19 +137,19 @@ namespace MusicPlayerApp.Models
         public object Href { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class Image
     {
         [JsonPropertyName("height")]
-        public int Height { get; set; }
+        public double Height { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
 
         [JsonPropertyName("width")]
-        public int Width { get; set; }
+        public double Width { get; set; }
     }
 
     public class Track
@@ -246,6 +246,72 @@ namespace MusicPlayerApp.Models
 
         [JsonPropertyName("items")]
         public List<Track> Items { get; set; }
+
+        [JsonPropertyName("limit")]
+        public int Limit { get; set; }
+
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
+
+        [JsonPropertyName("offset")]
+        public int Offset { get; set; }
+
+        [JsonPropertyName("previous")]
+        public object Previous { get; set; }
+
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
+    }
+
+    public class FavoriteAlbum
+    {
+        [JsonPropertyName("added_at")]
+        public string AddedAt { get; set; }
+
+        [JsonPropertyName("album")]
+        public Album Album { get; set; }
+    }
+
+    public class FavoriteTrack
+    {
+        [JsonPropertyName("added_at")]
+        public string AddedAt { get; set; }
+
+        [JsonPropertyName("track")]
+        public Track Track { get; set; }
+    }
+
+    public class FavoriteAlbumsResult
+    {
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("items")]
+        public List<FavoriteAlbum> Items { get; set; }
+
+        [JsonPropertyName("limit")]
+        public int Limit { get; set; }
+
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
+
+        [JsonPropertyName("offset")]
+        public int Offset { get; set; }
+
+        [JsonPropertyName("previous")]
+        public object Previous { get; set; }
+
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
+    }
+
+    public class FavoriteTracksResult
+    {
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("items")]
+        public List<FavoriteTrack> Items { get; set; }
 
         [JsonPropertyName("limit")]
         public int Limit { get; set; }

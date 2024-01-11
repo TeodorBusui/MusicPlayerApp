@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Views;
+
 namespace MusicPlayerApp.Views;
 
 public partial class ArtistView
@@ -10,5 +12,10 @@ public partial class ArtistView
         this.viewModel = viewModel;
 
         BindingContext = viewModel;
+    }
+
+    private void OpenActions(object sender, System.EventArgs e)
+    {
+        ActionsFrame.IsVisible = !ActionsFrame.IsVisible;
     }
 }
