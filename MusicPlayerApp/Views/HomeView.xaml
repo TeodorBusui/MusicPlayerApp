@@ -68,6 +68,10 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:SearchItemViewModel">
                             <HorizontalStackLayout Spacing="10" Padding="0,0,0,10">
+                                <HorizontalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                          CommandParameter="{Binding Id}"/>
+                                </HorizontalStackLayout.GestureRecognizers>
                                 <Image Source="{Binding ImageUrl, Mode=OneTime}"
                                        WidthRequest="35"
                                        HeightRequest="35"

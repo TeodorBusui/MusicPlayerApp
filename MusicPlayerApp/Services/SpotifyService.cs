@@ -102,6 +102,13 @@
             return Get<FavoriteAlbumsResult>(url);
         }
 
+        public Task<Track> GetTrack(string trackId) 
+        {
+            var url = $"tracks/{trackId}";
+
+            return Get<Track>(url);
+        }
+
         public Task<SearchResult> GetNewReleases()
         {
             var url = "browse/new-releases";
@@ -122,6 +129,49 @@
 
             return Get<FavoriteTracksResult>(url);
         }
+
+        public Task AddFavoriteArtist(string artistId)
+        {
+            var url = "me/following?type=artist";
+
+            return FollowArtist(url, artistId);
+        }
+
+        public Task RemoveFavoriteArtist(string artistId)
+        {
+            var url = "me/following?type=artist";
+
+            return UnfollowArtist(url, artistId);
+        }
+
+        public Task AddFavoriteAlbum(string albumId)
+        {
+            var url = "me/albums";
+
+            return FollowAlbum(url, albumId);
+        }
+
+        public Task RemoveFavoriteAlbum(string albumId)
+        {
+            var url = "me/albums";
+
+            return UnfollowAlbum(url, albumId);
+        }
+
+        public Task AddFavoriteTrack(string trackId)
+        {
+            var url = "me/tracks";
+
+            return SaveTrack(url, trackId);
+        }
+
+        public Task RemoveFavoriteTrack(string trackId)
+        {
+            var url = "me/tracks";
+
+            return UnsaveTrack(url, trackId);
+        }
+
 
         private int retryCount = 0;
         private async Task<T> Get<T>(string url)
@@ -153,6 +203,162 @@
             var result = JsonSerializer.Deserialize<T>(content);
 
             return result;
+        }
+
+        private async Task FollowArtist(string url, string artistId)
+        {
+            List<string> ids = new List<string>() { artistId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task UnfollowArtist(string url, string artistId)
+        {
+            List<string> ids = new List<string>() { artistId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task FollowAlbum(string url, string albumId)
+        {
+            List<string> ids = new List<string>() { albumId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task UnfollowAlbum(string url, string albumId)
+        {
+            List<string> ids = new List<string>() { albumId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task SaveTrack(string url, string trackId)
+        {
+            List<string> ids = new List<string>() { trackId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task UnsaveTrack(string url , string trackId)
+        {
+            List<string> ids = new List<string>() { trackId };
+
+            var request = new
+            {
+                ids = ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void RefreshClient()

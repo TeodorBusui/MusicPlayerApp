@@ -28,7 +28,8 @@
                         FontSize="15"
                         CornerRadius="20"
                         HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Command="{Binding AddToFavoritesCommand}"/>
                 <Button Background="White"
                         Text="Remove from favorites"
                         TextColor="#2d2e37"
@@ -36,7 +37,8 @@
                         FontSize="15"
                         CornerRadius="20"
                         HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Command="{Binding RemoveFromFavoritesCommand}"/>
             </StackLayout>
         </Frame>
 

@@ -11,8 +11,17 @@
         Task<Album> GetAlbum(string id);
         Task<Albums> GetAlbums(string artistId);
         Task<FavoriteAlbumsResult> GetFavoriteAlbums();
+        Task<Track> GetTrack(string trackId);
         Task<SearchResult> GetNewReleases();
         Task<Tracks> GetAlbumTracks(string albumId);
         Task<FavoriteTracksResult> GetFavoriteTracks();
+
+        Task AddFavoriteArtist(string artistId);
+        Task AddFavoriteAlbum(string albumId);
+        Task AddFavoriteTrack(string trackId);
+
+        Task RemoveFavoriteArtist(string artistId);
+        Task RemoveFavoriteAlbum(string albumId);
+        Task RemoveFavoriteTrack(string trackId);
     }
 }

@@ -65,5 +65,17 @@
         {
             Navigation.NavigateTo("Album", id);
         }
+
+        [RelayCommand]
+        private void AddToFavorites()
+        {
+            spotifyService.AddFavoriteArtist(NavigationParameter.ToString());
+        }
+
+        [RelayCommand]
+        private void RemoveFromFavorites()
+        {
+            spotifyService.RemoveFavoriteArtist(NavigationParameter.ToString());
+        }
     }
 }

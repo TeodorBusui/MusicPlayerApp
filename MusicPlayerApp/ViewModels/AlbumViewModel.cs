@@ -38,6 +38,7 @@
                     Title = x.Name,
                     SubTitle = string.Join(",", x.Artists.Select(a => a.Name)),
                     ImageUrl = album.Images.Any() ? album.Images.First().Url : null,
+                    TapCommand = NavigateToTrackCommand,
                 });
 
                 Tracks = new(trackResult);
@@ -55,5 +56,24 @@
 
         [ObservableProperty]
         private ObservableCollection<SearchItemViewModel> tracks = new();
+
+
+        [RelayCommand]
+        private void NavigateToTrack(string id)
+        {
+            Navigation.NavigateTo("Track", id);
+        }
+
+        [RelayCommand]
+        private void AddToFavorites()
+        {
+            spotifyService.AddFavoriteAlbum(NavigationParameter.ToString());
+        }
+
+        [RelayCommand]
+        private void RemoveFromFavorites()
+        {
+            spotifyService.RemoveFavoriteAlbum(NavigationParameter.ToString());
+        }
     }
 }

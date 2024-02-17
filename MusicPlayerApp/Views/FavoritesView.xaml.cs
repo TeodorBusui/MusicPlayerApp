@@ -11,4 +11,11 @@ public partial class FavoritesView
 
         BindingContext = viewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        viewModel.InitializeAsync();
+    }
 }

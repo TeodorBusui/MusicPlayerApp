@@ -1,0 +1,92 @@
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+             xmlns:vm="clr-namespace:MusicPlayerApp.ViewModels"
+             x:Class="MusicPlayerApp.Views.TrackView"
+             x:DataType="vm:TrackViewModel"
+             BackgroundColor="#2d2e37"
+             Title="">
+
+    <mvvm:TinyView.ToolbarItems>
+        <ToolbarItem Text="Actions" Order="Primary" Priority="0" Clicked="OpenActions" />
+    </mvvm:TinyView.ToolbarItems>
+
+    <Grid x:Name="MainContent">
+
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="Transparent" CornerRadius="10" Padding="10">
+            <StackLayout VerticalOptions="Center" Spacing="20">
+                <Button Background="White"
+                        Text="Add to favorites"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding AddToFavoritesCommand}"/>
+                <Button Background="White"
+                        Text="Remove from favorites"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding RemoveFromFavoritesCommand}"/>
+            </StackLayout>
+        </Frame>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+
+        <VerticalStackLayout>
+
+            <Label Grid.Row="0" Text="{Binding Name}" TextColor="White" FontSize="Title" FontFamily="Rubik" FontAttributes="Bold" HorizontalOptions="Center" Margin="0, 20, 0, 0"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <CollectionView ItemsSource="{Binding Artists}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" TextColor="White" FontSize="20" FontFamily="Rubik" Margin="5,0"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <Grid HeightRequest="450" 
+                  HorizontalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="0.1*" />
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="1"
+                       HorizontalOptions="Center"
+                       CornerRadius="20"
+                       IsClippedToBounds="True"
+                       Padding="0"
+                       BorderColor="#2d2e37"
+                       Margin="0, 0, 0, 70">
+                    <Image Aspect="AspectFill" 
+                           Source="{Binding TopImage}"/>
+                </Frame>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Button Text="Play" />
+
+                    <Button Text="Pause"/>
+
+                    <Slider Maximum="{Binding Duration}" Value="0" WidthRequest="200" />
+
+                    <Label Text="{Binding CurrentTime}" TextColor="White" />
+                </StackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+    </Grid>
+</mvvm:TinyView>

@@ -72,7 +72,7 @@ namespace MusicPlayerApp.ViewModels
                 {
                     Id = x.Id,
                     Title = x.Name,
-                    SubTitle = x.Artists.Any() ? x.Artists.First().Name : null,
+                    SubTitle = string.Join(",", x.Artists.Select(a => a.Name)),
                     ImageUrl = x.Album.Images.Any() ? x.Album.Images.First().Url : null,
                     TapCommand = NavigateToTrackCommand,
                 });
@@ -102,9 +102,9 @@ namespace MusicPlayerApp.ViewModels
         }
 
         [RelayCommand]
-        private void NavigateToTrack()
+        private void NavigateToTrack(string id)
         {
-
+            Navigation.NavigateTo("Track", id);
         }
     }
 

@@ -17,7 +17,7 @@ namespace MusicPlayerApp.ViewModels
             InitializeAsync();
         }
 
-        private async void InitializeAsync()
+        public async void InitializeAsync()
         {
             await FavoritesData();
         }
@@ -60,7 +60,7 @@ namespace MusicPlayerApp.ViewModels
                 {
                     Id = x.Track.Id,
                     Title = x.Track.Name,
-                    SubTitle = x.Track.Artists.Any() ? x.Track.Artists.First().Name : null,
+                    SubTitle = string.Join(",", x.Track.Artists.Select(a => a.Name)),
                     ImageUrl = x.Track.Album.Images.Any() ? x.Track.Album.Images.First().Url : null,
                     TapCommand = NavigateToTrackCommand,
                 });
