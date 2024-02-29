@@ -35,7 +35,7 @@ namespace MusicPlayerApp.Models
         public string ReleaseDatePrecision { get; set; }
 
         [JsonPropertyName("total_tracks")]
-        public int TotalTracks { get; set; }
+        public double TotalTracks { get; set; }
 
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -53,19 +53,19 @@ namespace MusicPlayerApp.Models
         public List<Album> Items { get; set; }
 
         [JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("next")]
         public string Next { get; set; }
 
         [JsonPropertyName("offset")]
-        public int Offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("previous")]
         public object Previous { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class Artist
@@ -104,19 +104,19 @@ namespace MusicPlayerApp.Models
         public List<Artist> Items { get; set; }
 
         [JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("next")]
         public string Next { get; set; }
 
         [JsonPropertyName("offset")]
-        public int Offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("previous")]
         public object Previous { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class ExternalIds
@@ -185,7 +185,7 @@ namespace MusicPlayerApp.Models
         public string ReleaseDatePrecision { get; set; }
 
         [JsonPropertyName("total_tracks")]
-        public int TotalTracks { get; set; }
+        public double TotalTracks { get; set; }
 
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -200,16 +200,16 @@ namespace MusicPlayerApp.Models
         public List<string> Genres { get; set; }
 
         [JsonPropertyName("popularity")]
-        public int Popularity { get; set; }
+        public double Popularity { get; set; }
 
         [JsonPropertyName("album")]
         public Album Album { get; set; }
 
         [JsonPropertyName("disc_number")]
-        public int DiscNumber { get; set; }
+        public double DiscNumber { get; set; }
 
         [JsonPropertyName("duration_ms")]
-        public int DurationMs { get; set; }
+        public double DurationMs { get; set; }
 
         [JsonPropertyName("explicit")]
         public bool Explicit { get; set; }
@@ -224,7 +224,7 @@ namespace MusicPlayerApp.Models
         public string PreviewUrl { get; set; }
 
         [JsonPropertyName("track_number")]
-        public int TrackNumber { get; set; }
+        public double TrackNumber { get; set; }
     }
 
     public class SearchResult
@@ -248,19 +248,19 @@ namespace MusicPlayerApp.Models
         public List<Track> Items { get; set; }
 
         [JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("next")]
         public string Next { get; set; }
 
         [JsonPropertyName("offset")]
-        public int Offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("previous")]
         public object Previous { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class FavoriteAlbum
@@ -290,19 +290,19 @@ namespace MusicPlayerApp.Models
         public List<FavoriteAlbum> Items { get; set; }
 
         [JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("next")]
         public string Next { get; set; }
 
         [JsonPropertyName("offset")]
-        public int Offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("previous")]
         public object Previous { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class FavoriteTracksResult
@@ -314,19 +314,19 @@ namespace MusicPlayerApp.Models
         public List<FavoriteTrack> Items { get; set; }
 
         [JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("next")]
         public string Next { get; set; }
 
         [JsonPropertyName("offset")]
-        public int Offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("previous")]
         public object Previous { get; set; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public double Total { get; set; }
     }
 
     public class Device
@@ -350,7 +350,7 @@ namespace MusicPlayerApp.Models
         public string Type { get; set; }
 
         [JsonPropertyName("volume_percent")]
-        public int VolumePercent { get; set; }
+        public double VolumePercent { get; set; }
 
         [JsonPropertyName("supports_volume")]
         public bool SupportsVolume { get; set; }
