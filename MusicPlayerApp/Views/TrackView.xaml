@@ -77,13 +77,17 @@
                 </Frame>
 
                 <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Button Text="Play" />
+                    <Button Text="Play"
+                            Command="{Binding PlayTrackCommand}"/>
 
-                    <Button Text="Pause"/>
+                    <Button Text="Pause"
+                            Command="{Binding PauseTrackCommand}"/>
 
-                    <Slider Maximum="{Binding Duration}" Value="0" WidthRequest="200" />
+                    <Slider Maximum="{Binding TrackDuration}" 
+                            Value="{Binding Progress}" 
+                            WidthRequest="200" />
 
-                    <Label Text="{Binding CurrentTime}" TextColor="White" />
+                    <Label Text="{Binding CurrentPosition}" TextColor="White" />
                 </StackLayout>
             </Grid>
 

@@ -130,6 +130,13 @@
             return Get<FavoriteTracksResult>(url);
         }
 
+        public Task<Devices> GetAvailableDevices() 
+        {
+            var url = "me/player/devices";
+
+            return Get<Devices>(url);
+        }
+
         public Task AddFavoriteArtist(string artistId)
         {
             var url = "me/following?type=artist";
@@ -172,6 +179,26 @@
             return UnsaveTrack(url, trackId);
         }
 
+        public Task PlayTrack(string trackId)
+        {
+            var url = "me/player/play";
+
+            return StartPlayingTrack(url, trackId);
+        }
+
+        public Task PauseTrack()
+        {
+            var url = "me/player/pause";
+
+            return PausePlayingTrack(url);
+        }
+
+        public Task TransferPlayback(string deviceId)
+        {
+            var url = "me/player";
+
+            return ChangePlaybackDevice(url, deviceId);
+        }
 
         private int retryCount = 0;
         private async Task<T> Get<T>(string url)
@@ -349,6 +376,76 @@
             try
             {
                 var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task StartPlayingTrack(string url, string trackId)
+        {
+            List<string> uris = new List<string>() { $"spotify:track:{trackId}" };
+            int position = 0;
+
+            var request = new
+            {
+                uris = uris,
+                position = position
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task PausePlayingTrack(string url)
+        {
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task ChangePlaybackDevice(string url, string deviceId)
+        {
+            List<string> device_ids = new List<string>() { deviceId };
+
+            var request = new
+            {
+                device_ids = device_ids
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
                 {
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
                 };

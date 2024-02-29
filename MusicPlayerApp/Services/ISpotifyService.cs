@@ -16,6 +16,8 @@
         Task<Tracks> GetAlbumTracks(string albumId);
         Task<FavoriteTracksResult> GetFavoriteTracks();
 
+        Task<Devices> GetAvailableDevices();
+
         Task AddFavoriteArtist(string artistId);
         Task AddFavoriteAlbum(string albumId);
         Task AddFavoriteTrack(string trackId);
@@ -23,5 +25,10 @@
         Task RemoveFavoriteArtist(string artistId);
         Task RemoveFavoriteAlbum(string albumId);
         Task RemoveFavoriteTrack(string trackId);
+
+        Task PlayTrack(string trackId);
+        Task PauseTrack();
+
+        Task TransferPlayback(string deviceId);
     }
 }
