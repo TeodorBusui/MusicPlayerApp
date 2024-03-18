@@ -1,0 +1,57 @@
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+             xmlns:vm="clr-namespace:MusicPlayerApp.ViewModels"
+             xmlns:converters="clr-namespace:MusicPlayerApp.Converters"
+             x:Class="MusicPlayerApp.Views.PlaylistsView"
+             x:DataType="vm:PlaylistsViewModel"
+             BackgroundColor="#2d2e37">
+
+    <mvvm:TinyView.Resources>
+        <converters:ViewToColumnWidthConverter x:Key="ToColumnWidth" NumberOfColumns="2" Deducation="40"/>
+    </mvvm:TinyView.Resources>
+
+    <Grid x:Name="MainContent">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+
+        <CollectionView IsVisible="{Binding IsNotBusy}" 
+                        ItemsSource="{Binding Playlists}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" 
+                                 Span="2" 
+                                 VerticalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SearchItemViewModel">
+                    <VerticalStackLayout Padding="10">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                               Aspect="AspectFill" 
+                               HorizontalOptions="Start"
+                               HeightRequest="{Binding Source={x:Reference MainContent}, Path=., Converter={StaticResource ToColumnWidth}}"
+                               WidthRequest="{Binding Source={x:Reference MainContent}, Path=., Converter={StaticResource ToColumnWidth}}"/>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" TextColor="White" FontSize="Header" FontFamily="Rubik" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label TextColor="White" FontSize="Caption" FontFamily="Rubik" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Owner: "/>
+                                        <Span Text="{Binding SubTitle}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </Grid>
+</mvvm:TinyView>

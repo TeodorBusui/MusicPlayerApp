@@ -19,7 +19,7 @@
             {
                 if (await spotifyService.IsSignedIn())
                 {
-                    await Navigation.NavigateTo("//Home");
+                    await Navigation.NavigateTo("//NewReleases");
                 }
             }
             catch (Exception ex) 
@@ -45,7 +45,7 @@
 
             if(result)
             {
-                await Navigation.NavigateTo("//Home");
+                await Navigation.NavigateTo("//NewReleases");
             }
         }
     }

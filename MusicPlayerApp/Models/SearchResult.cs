@@ -143,13 +143,13 @@ namespace MusicPlayerApp.Models
     public class Image
     {
         [JsonPropertyName("height")]
-        public double Height { get; set; }
+        public double? Height { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
 
         [JsonPropertyName("width")]
-        public double Width { get; set; }
+        public double? Width { get; set; }
     }
 
     public class Track
@@ -225,6 +225,39 @@ namespace MusicPlayerApp.Models
 
         [JsonPropertyName("track_number")]
         public double TrackNumber { get; set; }
+    }
+
+    public class CurrentlyPlayingTrack
+    {
+        [JsonPropertyName("device")]
+        public Device Device { get; set; }
+
+        [JsonPropertyName("repeat_state")]
+        public string RepeatState { get; set; }
+
+        [JsonPropertyName("shuffle_state")]
+        public bool ShuffleState { get; set; }
+
+        [JsonPropertyName("context")]
+        public Context Context { get; set; }
+
+        [JsonPropertyName("timestamp")]
+        public double Timestamp { get; set; }
+
+        [JsonPropertyName("progress_ms")]
+        public double ProgressMs { get; set; }
+
+        [JsonPropertyName("is_playing")]
+        public bool IsPlaying { get; set; }
+
+        [JsonPropertyName("item")]
+        public Track Track { get; set; }
+
+        [JsonPropertyName("currently_playing_type")]
+        public string CurrentlyPlayingType { get; set; }
+
+        [JsonPropertyName("actions")]
+        public Actions Actions { get; set; }
     }
 
     public class SearchResult
@@ -360,5 +393,248 @@ namespace MusicPlayerApp.Models
     {
         [JsonPropertyName("devices")]
         public List<Device> AvailableDevices { get; set; }
+    }
+
+    public class AddedBy
+    {
+        [JsonPropertyName("external_urls")]
+        public ExternalUrls ExternalUrls { get; set; }
+
+        [JsonPropertyName("followers")]
+        public Followers Followers { get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
+
+    public class Owner
+    {
+        [JsonPropertyName("external_urls")]
+        public ExternalUrls ExternalUrls { get; set; }
+
+        [JsonPropertyName("followers")]
+        public Followers Followers {  get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+
+        [JsonPropertyName("display_name")]
+        public string DisplayName { get; set; }
+    }
+
+    public class SimplifiedPlaylistObject
+    {
+        [JsonPropertyName("collaborative")]
+        public bool Collaborative { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("external_urls")]
+        public ExternalUrls ExternalUrls { get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("images")]
+        public List<Image> Images { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("owner")]
+        public Owner Owner { get; set; }
+
+        [JsonPropertyName("public")]
+        public bool Public { get; set; }
+
+        [JsonPropertyName("snapshot_id")]
+        public string SnapshotId { get; set; }
+
+        [JsonPropertyName("tracks")]
+        public Tracks Tracks { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
+
+    public class Playlist
+    {
+        [JsonPropertyName("collaborative")]
+        public bool Collaborative { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("external_urls")]
+        public ExternalUrls ExternalUrls { get; set; }
+
+        [JsonPropertyName("followers")]
+        public Followers Followers { get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("images")]
+        public List<Image> Images { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("owner")]
+        public Owner Owner { get; set; }
+
+        [JsonPropertyName("public")]
+        public bool Public { get; set; }
+
+        [JsonPropertyName("snapshot_id")]
+        public string SnapshotId { get; set; }
+
+        [JsonPropertyName("tracks")]
+        public Tracks Tracks { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
+
+    public class Playlists
+    {
+        [JsonPropertyName ("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("limit")]
+        public double Limit { get; set; }
+
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
+
+        [JsonPropertyName ("offset")]
+        public double Offset { get; set; }
+
+        [JsonPropertyName("previous")]
+        public string Previous { get; set; }
+
+        [JsonPropertyName("total")]
+        public double Total { get; set; }
+
+        [JsonPropertyName("items")]
+        public List<SimplifiedPlaylistObject> Items { get; set; }
+    }
+
+    public class PlaylistTrackObject
+    {
+        [JsonPropertyName("added_at")]
+        public string AddedAt { get; set; }
+
+        [JsonPropertyName("added_by")]
+        public AddedBy AddedBy { get; set; }
+
+        [JsonPropertyName("is_local")]
+        public bool IsLocal { get; set; }
+
+        [JsonPropertyName("track")]
+        public Track Track { get; set; }
+    }
+
+    public class PlaylistTracks
+    {
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("limit")]
+        public double Limit { get; set; }
+
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
+
+        [JsonPropertyName("offset")]
+        public double Offset { get; set; }
+
+        [JsonPropertyName("previous")]
+        public string Previous { get; set; }
+
+        [JsonPropertyName("total")]
+        public double Total { get; set; }
+
+        [JsonPropertyName("items")]
+        public List<PlaylistTrackObject> Items { get; set; }
+    }
+
+    public class Context
+    {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("external_urls")]
+        public ExternalUrls ExternalUrls { get; set; }
+
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
+
+    public class Actions
+    {
+        [JsonPropertyName("interrupting_playback")]
+        public bool InterruptionPlayback { get; set; }
+
+        [JsonPropertyName("pausing")]
+        public bool Pausing { get; set; }
+
+        [JsonPropertyName("resuming")]
+        public bool Resuming { get; set; }
+
+        [JsonPropertyName("seeking")]
+        public bool Seeking { get; set; }
+
+        [JsonPropertyName("skipping_next")]
+        public bool SkippingNext { get; set; }
+
+        [JsonPropertyName("skipping_prev")]
+        public bool SkippingPrevious { get; set; }
+
+        [JsonPropertyName("toggling_repeat_context")]
+        public bool TogglingRepeatContext { get; set; }
+
+        [JsonPropertyName("toggling_shuffle")]
+        public bool TogglingShuffle { get; set; }
+
+        [JsonPropertyName("toggleing_repeat_track")]
+        public bool TogglingRepeatTrack { get; set; }
+
+        [JsonPropertyName("transferring_playback")]
+        public bool TransferringPlayback { get; set; }
     }
 }

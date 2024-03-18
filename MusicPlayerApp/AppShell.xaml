@@ -29,7 +29,7 @@
             Title="Playlists"
             Icon="ic_playlist.png"
             Route="Playlists"
-            ContentTemplate="{DataTemplate views:LoginView}"/>
+            ContentTemplate="{DataTemplate views:PlaylistsView}"/>
         <ShellContent
             Title="New Releases"
             Icon="ic_newrelease.png"

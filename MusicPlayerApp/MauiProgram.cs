@@ -49,6 +49,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<NewReleasesViewModel>();
 		builder.Services.AddTransient<FavoritesViewModel>();
 		builder.Services.AddTransient<TrackViewModel>();
+		builder.Services.AddTransient<PlaylistsViewModel>();
+		builder.Services.AddTransient<PlaylistViewModel>();
 
 		builder.Services.AddTransient<LoginView>();
 		builder.Services.AddTransient<HomeView>();
@@ -57,6 +59,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<NewReleasesView>();
 		builder.Services.AddTransient<FavoritesView>();
 		builder.Services.AddTransient<TrackView>();
+        builder.Services.AddTransient<PlaylistsView>();
+		builder.Services.AddTransient<PlaylistView>();
 
         builder.Services.AddSingleton<ISpotifyService, SpotifyService>();
 		builder.Services.AddSingleton<ISecureStorageService, SecureStorageService>();
@@ -70,6 +74,7 @@ public static class MauiProgram
 	{
 		Routing.RegisterRoute("Artist", typeof(ArtistView));
 		Routing.RegisterRoute("Album", typeof(AlbumView));
-		Routing.RegisterRoute("Track", typeof(TrackView));	
+		Routing.RegisterRoute("Track", typeof(TrackView));
+		Routing.RegisterRoute("Playlist", typeof(PlaylistView));
 	}
 }

@@ -95,7 +95,9 @@ namespace MusicPlayerApp.ViewModels
 
             await spotifyService.TransferPlayback(devices.AvailableDevices[0].Id);
 
-            await spotifyService.PlayTrack(NavigationParameter.ToString());
+            CurrentlyPlayingTrack currentlyPlayingTrack = await spotifyService.GetCurrentlyPlayingTrack();
+
+            await spotifyService.PlayTrack(NavigationParameter.ToString(), currentlyPlayingTrack);
 
             timer.Start();
         }
@@ -103,7 +105,7 @@ namespace MusicPlayerApp.ViewModels
         [RelayCommand]
         private async void PauseTrack()
         {
-            await spotifyService.PauseTrack();
+            await spotifyService.Pause();
             
             timer.Elapsed -= TimerElapsed;
         }

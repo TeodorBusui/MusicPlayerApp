@@ -15,6 +15,10 @@
         Task<SearchResult> GetNewReleases();
         Task<Tracks> GetAlbumTracks(string albumId);
         Task<FavoriteTracksResult> GetFavoriteTracks();
+        Task<Playlists> GetPlaylists();
+        Task<Playlist> GetPlaylist(string id);
+        Task<PlaylistTracks> GetPlaylistTracks(string id);
+        Task<CurrentlyPlayingTrack> GetCurrentlyPlayingTrack();
 
         Task<Devices> GetAvailableDevices();
 
@@ -26,8 +30,10 @@
         Task RemoveFavoriteAlbum(string albumId);
         Task RemoveFavoriteTrack(string trackId);
 
-        Task PlayTrack(string trackId);
-        Task PauseTrack();
+        Task PlayTrack(string trackId, CurrentlyPlayingTrack currentlyPlayingTrack);
+        Task PlayPlaylist(string playlistId, CurrentlyPlayingTrack currentlyPlayingTrack);
+
+        Task Pause();
 
         Task TransferPlayback(string deviceId);
     }

@@ -95,6 +95,12 @@
 	  <MauiXaml Update="Views\NewReleasesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PlaylistsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PlaylistView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TrackView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

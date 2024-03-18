@@ -137,6 +137,34 @@
             return Get<Devices>(url);
         }
 
+        public Task<Playlists> GetPlaylists() 
+        {
+            var url = "me/playlists";
+
+            return Get<Playlists>(url);
+        }
+
+        public Task<Playlist> GetPlaylist(string playlistId)
+        {
+            var url = $"playlists/{playlistId}";
+
+            return Get<Playlist>(url);
+        }
+
+        public Task<PlaylistTracks> GetPlaylistTracks(string  playlistId)
+        {
+            var url = $"playlists/{playlistId}/tracks";
+
+            return Get<PlaylistTracks>(url);
+        }
+
+        public Task<CurrentlyPlayingTrack> GetCurrentlyPlayingTrack()
+        {
+            var url = "me/player/currently-playing";
+
+            return Get<CurrentlyPlayingTrack>(url);
+        }
+
         public Task AddFavoriteArtist(string artistId)
         {
             var url = "me/following?type=artist";
@@ -179,18 +207,25 @@
             return UnsaveTrack(url, trackId);
         }
 
-        public Task PlayTrack(string trackId)
+        public Task PlayTrack(string trackId, CurrentlyPlayingTrack currentlyPlayingTrack)
         {
             var url = "me/player/play";
 
-            return StartPlayingTrack(url, trackId);
+            return StartPlayingTrack(url, trackId, currentlyPlayingTrack);
         }
 
-        public Task PauseTrack()
+        public Task PlayPlaylist(string playlistId, CurrentlyPlayingTrack currentlyPlayingTrack)
+        {
+            var url = "me/player/play";
+
+            return StartPlayingPlaylist(url, playlistId, currentlyPlayingTrack);
+        }
+
+        public Task Pause()
         {
             var url = "me/player/pause";
 
-            return PausePlayingTrack(url);
+            return PausePlaying(url);
         }
 
         public Task TransferPlayback(string deviceId)
@@ -388,15 +423,14 @@
             }
         }
 
-        private async Task StartPlayingTrack(string url, string trackId)
+        private async Task StartPlayingTrack(string url, string trackId, CurrentlyPlayingTrack currentlyPlayingTrack)
         {
             List<string> uris = new List<string>() { $"spotify:track:{trackId}" };
-            int position = 0;
 
             var request = new
             {
                 uris = uris,
-                position = position
+                position = currentlyPlayingTrack.ProgressMs
             };
 
             string json = JsonSerializer.Serialize(request);
@@ -416,7 +450,34 @@
             }
         }
 
-        private async Task PausePlayingTrack(string url)
+        private async Task StartPlayingPlaylist(string url, string playlistId, CurrentlyPlayingTrack currentlyPlayingTrack)
+        {
+            string context_uri = $"spotify:playlist:{playlistId}";
+
+            var request = new
+            {
+                context_uri = context_uri,
+                position_ms = currentlyPlayingTrack.ProgressMs
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task PausePlaying(string url)
         {
             try
             {
