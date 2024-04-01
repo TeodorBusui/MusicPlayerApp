@@ -1,4 +1,6 @@
-﻿namespace MusicPlayerApp.Services
+﻿using System;
+
+namespace MusicPlayerApp.Services
 {
     public class SpotifyService : ISpotifyService
     {
@@ -430,8 +432,17 @@
             var request = new
             {
                 uris = uris,
-                position = currentlyPlayingTrack.ProgressMs
+                position_ms = 0
             };
+
+            if(currentlyPlayingTrack != null && currentlyPlayingTrack.Track.Id == trackId)
+            {
+                request = new
+                {
+                    uris = uris,
+                    position_ms = (int)currentlyPlayingTrack.ProgressMs
+                };
+            }
 
             string json = JsonSerializer.Serialize(request);
 
@@ -454,11 +465,22 @@
         {
             string context_uri = $"spotify:playlist:{playlistId}";
 
+            PlaylistTracks playlistTracks = await GetPlaylistTracks(playlistId);
+
             var request = new
             {
                 context_uri = context_uri,
-                position_ms = currentlyPlayingTrack.ProgressMs
+                position_ms = 0
             };
+
+            if (currentlyPlayingTrack != null && playlistTracks.Items[0].Track.Id == currentlyPlayingTrack.Track.Id)
+            {
+                request = new
+                {
+                    context_uri = context_uri,
+                    position_ms = (int)currentlyPlayingTrack.ProgressMs
+                };
+            }
 
             string json = JsonSerializer.Serialize(request);
 
