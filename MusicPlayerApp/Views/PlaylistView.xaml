@@ -33,6 +33,24 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Command="{Binding PauseCommand}"/>
+                <Button Background="White"
+                    Text="Next"
+                    TextColor="#2d2e37"
+                    FontFamily="Rubik"
+                    FontSize="15"
+                    CornerRadius="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Command="{Binding NextCommand}"/>
+                <Button Background="White"
+                    Text="Previous"
+                    TextColor="#2d2e37"
+                    FontFamily="Rubik"
+                    FontSize="15"
+                    CornerRadius="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Command="{Binding PreviousCommand}"/>
             </StackLayout>
         </Frame>
 

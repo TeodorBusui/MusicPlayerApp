@@ -34,6 +34,8 @@
         Task PlayPlaylist(string playlistId, CurrentlyPlayingTrack currentlyPlayingTrack);
 
         Task Pause();
+        Task Next();
+        Task Previous();
 
         Task TransferPlayback(string deviceId);
     }

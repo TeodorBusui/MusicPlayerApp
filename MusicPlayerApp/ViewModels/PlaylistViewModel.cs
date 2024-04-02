@@ -93,5 +93,17 @@ namespace MusicPlayerApp.ViewModels
         {
             await spotifyService.Pause();
         }
+
+        [RelayCommand]
+        private async void Next()
+        {
+            await spotifyService.Next();
+        }
+
+        [RelayCommand]
+        private async void Previous()
+        {
+            await spotifyService.Previous();
+        }
     }
 }

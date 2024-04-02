@@ -230,6 +230,20 @@ namespace MusicPlayerApp.Services
             return PausePlaying(url);
         }
 
+        public Task Next()
+        {
+            var url = "me/player/next";
+
+            return SkipToNext(url);
+        }
+
+        public Task Previous()
+        {
+            var url = "me/player/previous";
+
+            return SkipToPrevious(url);
+        }
+
         public Task TransferPlayback(string deviceId)
         {
             var url = "me/player";
@@ -440,7 +454,7 @@ namespace MusicPlayerApp.Services
                 request = new
                 {
                     uris = uris,
-                    position_ms = (int)currentlyPlayingTrack.ProgressMs
+                    position_ms = currentlyPlayingTrack.ProgressMs
                 };
             }
 
@@ -466,20 +480,33 @@ namespace MusicPlayerApp.Services
             string context_uri = $"spotify:playlist:{playlistId}";
 
             PlaylistTracks playlistTracks = await GetPlaylistTracks(playlistId);
+            Offset offset = new Offset();
+            offset.position = 0;
 
             var request = new
             {
                 context_uri = context_uri,
+                offset = offset,
                 position_ms = 0
             };
 
-            if (currentlyPlayingTrack != null && playlistTracks.Items[0].Track.Id == currentlyPlayingTrack.Track.Id)
+            if (currentlyPlayingTrack != null)
             {
-                request = new
+                for(int i = 0; i<playlistTracks.Total; i++)
                 {
-                    context_uri = context_uri,
-                    position_ms = (int)currentlyPlayingTrack.ProgressMs
-                };
+                    if (playlistTracks.Items[i].Track.Id == currentlyPlayingTrack.Track.Id)
+                    {
+                        offset.position = i;
+
+                        request = new
+                        {
+                            context_uri = context_uri,
+                            offset = offset,
+                            position_ms = currentlyPlayingTrack.ProgressMs
+                        };
+                        break;
+                    }
+                }
             }
 
             string json = JsonSerializer.Serialize(request);
@@ -504,6 +531,38 @@ namespace MusicPlayerApp.Services
             try
             {
                 var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task SkipToNext(string url)
+        {
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
+                {
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task SkipToPrevious(string url)
+        {
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
                 {
                 };
 

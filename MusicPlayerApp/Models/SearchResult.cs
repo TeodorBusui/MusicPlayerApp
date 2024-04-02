@@ -245,7 +245,7 @@ namespace MusicPlayerApp.Models
         public double Timestamp { get; set; }
 
         [JsonPropertyName("progress_ms")]
-        public double ProgressMs { get; set; }
+        public int ProgressMs { get; set; }
 
         [JsonPropertyName("is_playing")]
         public bool IsPlaying { get; set; }
@@ -636,5 +636,10 @@ namespace MusicPlayerApp.Models
 
         [JsonPropertyName("transferring_playback")]
         public bool TransferringPlayback { get; set; }
+    }
+
+    public class Offset
+    {
+        public int position { get; set; }
     }
 }
