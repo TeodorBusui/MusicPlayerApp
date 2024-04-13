@@ -33,6 +33,33 @@
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         Command="{Binding RemoveFromFavoritesCommand}"/>
+                <Picker Title="Playlist Name"
+                        Background="White"
+                        ItemsSource="{Binding PlaylistNames}"
+                        SelectedItem="{Binding SelectedPlaylistName}"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                <Button Background="White"
+                        Text="Add to playlist"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding AddToPlaylistCommand}"/>
+                <Button Background="White"
+                        Text="Remove from playlist"
+                        TextColor="#2d2e37"
+                        FontFamily="Rubik"
+                        FontSize="15"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding RemoveFromPlaylistCommand}"/>
             </StackLayout>
         </Frame>
 

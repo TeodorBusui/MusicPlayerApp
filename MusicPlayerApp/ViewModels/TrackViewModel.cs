@@ -42,6 +42,8 @@ namespace MusicPlayerApp.ViewModels
                 CurrentTime = CurrentPosition.ToString(@"mm\:ss");
 
                 timer = new System.Timers.Timer();
+
+                GetPlaylistNames();
             }
             catch (Exception ex)
             {
@@ -65,6 +67,12 @@ namespace MusicPlayerApp.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<string> artists;
+
+        [ObservableProperty]
+        private ObservableCollection<string> playlistNames;
+
+        [ObservableProperty]
+        private string selectedPlaylistName;
 
 
         [RelayCommand]
@@ -106,8 +114,42 @@ namespace MusicPlayerApp.ViewModels
         private async void PauseTrack()
         {
             await spotifyService.Pause();
-            
+
             timer.Elapsed -= TimerElapsed;
+        }
+
+        [RelayCommand]
+        private async void AddToPlaylist()
+        {
+            var playlistsTask = spotifyService.GetPlaylists();
+
+            await playlistsTask;
+
+            foreach(var playlist in playlistsTask.Result.Items) 
+            { 
+                if(playlist.Name == SelectedPlaylistName)
+                {
+                    await spotifyService.AddTrackToPlaylist(playlist.Id, NavigationParameter.ToString());
+                    break;
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async void RemoveFromPlaylist()
+        {
+            var playlistsTask = spotifyService.GetPlaylists();
+
+            await playlistsTask;
+
+            foreach (var playlist in playlistsTask.Result.Items)
+            {
+                if (playlist.Name == SelectedPlaylistName)
+                {
+                    await spotifyService.RemoveTrackFromPlaylist(playlist.Id, NavigationParameter.ToString(), playlist.SnapshotId);
+                    break;
+                }
+            }
         }
 
         private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -120,6 +162,17 @@ namespace MusicPlayerApp.ViewModels
             {
                 timer.Stop();
             }
+        }
+
+        private async void GetPlaylistNames()
+        {
+            var playlistNamesTask = spotifyService.GetPlaylists();
+
+            await playlistNamesTask;
+
+            var names = playlistNamesTask.Result.Items.Select(x => x.Name);
+
+            PlaylistNames = new ObservableCollection<string>(names);
         }
     }
 }

@@ -202,6 +202,20 @@ namespace MusicPlayerApp.Services
             return SaveTrack(url, trackId);
         }
 
+        public Task AddTrackToPlaylist(string playlistId, string trackId)
+        {
+            var url = $"playlists/{playlistId}/tracks";
+
+            return AddATrackToPlaylist(url, trackId);
+        }
+
+        public Task RemoveTrackFromPlaylist(string playlistId, string trackId, string snapshotId)
+        {
+            var url = $"playlists/{playlistId}/tracks";
+
+            return RemoveATrackFromPlaylist(url, trackId, snapshotId);
+        }
+
         public Task RemoveFavoriteTrack(string trackId)
         {
             var url = "me/tracks";
@@ -600,6 +614,64 @@ namespace MusicPlayerApp.Services
             }
         }
 
+        private async Task AddATrackToPlaylist(string url, string trackId)
+        {
+            List<string> uris = new List<string>() { $"spotify:track:{trackId}" };
+
+            var request = new
+            {
+                uris = uris
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task RemoveATrackFromPlaylist(string url, string trackId, string snapshotId)
+        {
+            List<TracksP> tracks = new List<TracksP>();
+
+            TracksP track = new TracksP();
+            track.uri = $"spotify:track:{trackId}";
+
+            tracks.Add(track);
+
+            var request = new
+            {
+                tracks = tracks,
+                snapshot_id = snapshotId
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
         private void RefreshClient()
         {
             if (client == null)
@@ -609,5 +681,12 @@ namespace MusicPlayerApp.Services
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
             }
         }
+    }
+
+    class TracksP
+    {
+        public TracksP() { }
+
+        public string uri { get; set;}
     }
 }

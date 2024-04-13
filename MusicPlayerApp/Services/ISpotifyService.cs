@@ -25,10 +25,12 @@
         Task AddFavoriteArtist(string artistId);
         Task AddFavoriteAlbum(string albumId);
         Task AddFavoriteTrack(string trackId);
+        Task AddTrackToPlaylist(string playlistId, string trackId);
 
         Task RemoveFavoriteArtist(string artistId);
         Task RemoveFavoriteAlbum(string albumId);
         Task RemoveFavoriteTrack(string trackId);
+        Task RemoveTrackFromPlaylist(string playlistId, string trackId, string snapshotId);
 
         Task PlayTrack(string trackId, CurrentlyPlayingTrack currentlyPlayingTrack);
         Task PlayPlaylist(string playlistId, CurrentlyPlayingTrack currentlyPlayingTrack);

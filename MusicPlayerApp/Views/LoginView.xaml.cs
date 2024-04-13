@@ -49,7 +49,7 @@ public partial class LoginView
     {
         if(e.PropertyName == nameof(loginViewModel.ShowLogin)) 
         {
-            var scopes = "playlist-read-private playlist-modify-private user-follow-read user-library-read user-follow-modify user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing";
+            var scopes = "playlist-read-private playlist-modify-private playlist-modify-public user-follow-read user-library-read user-follow-modify user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing";
 
             var querystring = $"response_type=code&client_id={Constants.SpotifyClientId}&scope={WebUtility.UrlEncode(scopes)}&redirect_uri={Constants.RedirectUrl}&state={state}";
 
