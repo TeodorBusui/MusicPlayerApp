@@ -167,6 +167,13 @@ namespace MusicPlayerApp.Services
             return Get<CurrentlyPlayingTrack>(url);
         }
 
+        public Task<User> GetCurrentUser()
+        {
+            var url = "me";
+
+            return Get<User>(url);
+        }
+
         public Task AddFavoriteArtist(string artistId)
         {
             var url = "me/following?type=artist";
@@ -186,6 +193,13 @@ namespace MusicPlayerApp.Services
             var url = "me/albums";
 
             return FollowAlbum(url, albumId);
+        }
+
+        public Task CreatePlaylist(string userId, string playlistName, bool publicPlaylist)
+        {
+            var url = $"users/{userId}/playlists";
+
+            return CreatePlaylistForAUser(url, playlistName, publicPlaylist);
         }
 
         public Task RemoveFavoriteAlbum(string albumId)
@@ -660,6 +674,31 @@ namespace MusicPlayerApp.Services
             try
             {
                 var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url)
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task CreatePlaylistForAUser(string url, string playlistName, bool publicPlaylist)
+        {
+            var request = new
+            {
+                name = playlistName,
+                @public = publicPlaylist
+            };
+
+            string json = JsonSerializer.Serialize(request);
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
                 {
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
                 };

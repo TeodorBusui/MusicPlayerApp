@@ -21,11 +21,13 @@
         Task<CurrentlyPlayingTrack> GetCurrentlyPlayingTrack();
 
         Task<Devices> GetAvailableDevices();
+        Task<User> GetCurrentUser();
 
         Task AddFavoriteArtist(string artistId);
         Task AddFavoriteAlbum(string albumId);
         Task AddFavoriteTrack(string trackId);
         Task AddTrackToPlaylist(string playlistId, string trackId);
+        Task CreatePlaylist(string userId, string playlistName, bool publicPlaylist);
 
         Task RemoveFavoriteArtist(string artistId);
         Task RemoveFavoriteAlbum(string albumId);

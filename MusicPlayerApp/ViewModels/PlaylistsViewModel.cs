@@ -8,6 +8,7 @@ namespace MusicPlayerApp.ViewModels
 {
     public partial class PlaylistsViewModel : ViewModel
     {
+        private readonly ISpotifyService spotifyService;
         public PlaylistsViewModel(ISpotifyService spotifyService)
         {
             this.spotifyService = spotifyService;
@@ -54,12 +55,43 @@ namespace MusicPlayerApp.ViewModels
 
         [ObservableProperty]
         ObservableCollection<SearchItemViewModel> playlists = new();
-        private readonly ISpotifyService spotifyService;
+
+        [ObservableProperty]
+        ObservableCollection<string> playlistPublicTypes = new()
+        {
+            "Yes",
+            "No"
+        };
+
+        [ObservableProperty]
+        private string playlistName;
+
+        [ObservableProperty]
+        private string playlistPublicType;
 
         [RelayCommand]
         private void NavigateToPlaylist(string id)
         {
               Navigation.NavigateTo("Playlist", id);
+        }
+
+        [RelayCommand]
+        private async void CreatePlaylist()
+        {
+            var currentUserTask = spotifyService.GetCurrentUser();
+
+            await currentUserTask;
+
+            var currentUser = currentUserTask.Result;
+
+            if (PlaylistPublicType == "Yes")
+            {
+                await spotifyService.CreatePlaylist(currentUser.Id, PlaylistName, true);
+            }
+            else
+            {
+                await spotifyService.CreatePlaylist(currentUser.Id, PlaylistName, false);
+            }
         }
     }
 }

@@ -19,4 +19,9 @@ public partial class PlaylistsView
 
         viewModel.InitializeAsync();
     }
+
+    private void OpenActions(object sender, System.EventArgs e)
+    {
+        ActionsFrame.IsVisible = !ActionsFrame.IsVisible;
+    }
 }

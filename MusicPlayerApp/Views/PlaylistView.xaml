@@ -13,7 +13,7 @@
 
     <Grid>
 
-        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="Transparent" CornerRadius="10" Padding="10">
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="#80000000" CornerRadius="10" Padding="10">
             <StackLayout VerticalOptions="Center" Spacing="20">
                 <Button Background="White"
                     Text="Play"
@@ -23,6 +23,7 @@
                     CornerRadius="20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    WidthRequest="100"
                     Command="{Binding StartPlayingCommand}"/>
                 <Button Background="White"
                     Text="Pause"
@@ -32,6 +33,7 @@
                     CornerRadius="20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    WidthRequest="100"
                     Command="{Binding PauseCommand}"/>
                 <Button Background="White"
                     Text="Next"
@@ -41,6 +43,7 @@
                     CornerRadius="20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    WidthRequest="100"
                     Command="{Binding NextCommand}"/>
                 <Button Background="White"
                     Text="Previous"
@@ -50,6 +53,7 @@
                     CornerRadius="20"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    WidthRequest="100"
                     Command="{Binding PreviousCommand}"/>
             </StackLayout>
         </Frame>

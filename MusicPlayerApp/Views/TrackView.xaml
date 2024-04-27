@@ -13,7 +13,7 @@
 
     <Grid x:Name="MainContent">
 
-        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="Transparent" CornerRadius="10" Padding="10">
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="#80000000" CornerRadius="10" Padding="10">
             <StackLayout VerticalOptions="Center" Spacing="20">
                 <Button Background="White"
                         Text="Add to favorites"
@@ -23,6 +23,7 @@
                         CornerRadius="20"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
+                        WidthRequest="200"
                         Command="{Binding AddToFavoritesCommand}"/>
                 <Button Background="White"
                         Text="Remove from favorites"
@@ -32,16 +33,20 @@
                         CornerRadius="20"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
+                        WidthRequest="200"
                         Command="{Binding RemoveFromFavoritesCommand}"/>
                 <Picker Title="Playlist Name"
                         Background="White"
                         ItemsSource="{Binding PlaylistNames}"
                         SelectedItem="{Binding SelectedPlaylistName}"
                         TextColor="#2d2e37"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
                         FontFamily="Rubik"
                         FontSize="15"
                         HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        WidthRequest="200"/>
                 <Button Background="White"
                         Text="Add to playlist"
                         TextColor="#2d2e37"
@@ -50,6 +55,7 @@
                         CornerRadius="20"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
+                        WidthRequest="200"
                         Command="{Binding AddToPlaylistCommand}"/>
                 <Button Background="White"
                         Text="Remove from playlist"
@@ -59,6 +65,7 @@
                         CornerRadius="20"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
+                        WidthRequest="200"
                         Command="{Binding RemoveFromPlaylistCommand}"/>
             </StackLayout>
         </Frame>

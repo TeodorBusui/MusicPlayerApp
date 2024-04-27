@@ -11,11 +11,53 @@
         <converters:ViewToColumnWidthConverter x:Key="ToColumnWidth" NumberOfColumns="2" Deducation="40"/>
     </mvvm:TinyView.Resources>
 
+    <mvvm:TinyView.ToolbarItems>
+        <ToolbarItem Text="Actions" Order="Primary" Priority="0" Clicked="OpenActions" />
+    </mvvm:TinyView.ToolbarItems>
+
     <Grid x:Name="MainContent">
+
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="#80000000" CornerRadius="10" Padding="10">
+            <StackLayout VerticalOptions="Center" Spacing="20">
+                <Entry Background="White"
+                       Text="{Binding PlaylistName}"
+                       TextColor="#2d2e37"
+                       FontFamily="Rubik"
+                       FontSize="15"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       WidthRequest="200"/>
+                <Picker Title="Make playlist public"
+                       Background="White"
+                       ItemsSource="{Binding PlaylistPublicTypes}"
+                       SelectedItem="{Binding PlaylistPublicType}"
+                       TextColor="#2d2e37"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontFamily="Rubik"
+                       FontSize="15"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="200"/>
+                <Button Background="White"
+                       Text="Create playlist"
+                       TextColor="#2d2e37"
+                       FontFamily="Rubik"
+                       FontSize="15"
+                       CornerRadius="20"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="200"
+                       Command="{Binding CreatePlaylistCommand}"/>
+            </StackLayout>
+        </Frame>
+
         <ActivityIndicator IsRunning="{Binding IsBusy}" 
                            HorizontalOptions="Center" 
                            VerticalOptions="Center"/>
-
+        
         <CollectionView IsVisible="{Binding IsNotBusy}" 
                         ItemsSource="{Binding Playlists}">
 
@@ -42,7 +84,7 @@
                             <Label TextColor="White" FontSize="Caption" FontFamily="Rubik" VerticalOptions="Center">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="Owner: "/>
+                                        <Span Text="Created by: "/>
                                         <Span Text="{Binding SubTitle}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
