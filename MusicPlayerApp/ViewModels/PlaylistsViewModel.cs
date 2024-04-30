@@ -92,6 +92,20 @@ namespace MusicPlayerApp.ViewModels
             {
                 await spotifyService.CreatePlaylist(currentUser.Id, PlaylistName, false);
             }
+
+            var playlistsTask = spotifyService.GetPlaylists();
+
+            await playlistsTask;
+            foreach (var playlist in playlistsTask.Result.Items)
+            {
+                if (playlist.Name == PlaylistName)
+                {
+                    await spotifyService.SetPlaylistDefaultImage(playlist.Id);
+                    break;
+                }
+            }
+
+            InitializeAsync();
         }
     }
 }

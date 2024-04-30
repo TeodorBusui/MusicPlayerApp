@@ -62,7 +62,7 @@
 	  <None Remove="Resources\Images\login.jpg" />
 	  <None Remove="Resources\Images\melodify_high_resolution_logo.svg" />
 	  <None Remove="Resources\Images\music-svgrepo-com.svg" />
-	  <None Remove="Resources\Images\playlist_image.jpeg" />
+	  <None Remove="Resources\Raw\playlistCover.jpeg" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.Controls;
+using System;
 
 namespace MusicPlayerApp.Services
 {
@@ -277,6 +278,13 @@ namespace MusicPlayerApp.Services
             var url = "me/player";
 
             return ChangePlaybackDevice(url, deviceId);
+        }
+
+        public Task SetPlaylistDefaultImage(string playlistId)
+        {
+            var url = $"playlists/{playlistId}/images";
+
+            return SetDefPlaylistImage(url);
         }
 
         private int retryCount = 0;
@@ -706,6 +714,28 @@ namespace MusicPlayerApp.Services
                 var response = await client.SendAsync(requestMessage);
             }
             catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        private async Task SetDefPlaylistImage(string url)
+        {
+            using var EnStream = await FileSystem.OpenAppPackageFileAsync("playlistCover.jpeg");
+            using var mstream = new MemoryStream();
+            EnStream.CopyTo(mstream);
+            var base64Image = Convert.ToBase64String(mstream.ToArray());
+
+            try
+            {
+                var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(base64Image, Encoding.Default, "image/jpeg")
+                };
+
+                var response = await client.SendAsync(requestMessage);
+            }
+            catch (Exception ex) 
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }

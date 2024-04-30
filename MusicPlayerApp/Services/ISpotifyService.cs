@@ -42,5 +42,6 @@
         Task Previous();
 
         Task TransferPlayback(string deviceId);
+        Task SetPlaylistDefaultImage(string playlistId);
     }
 }
