@@ -19,11 +19,12 @@
 
     <Grid x:Name="MainContent">
 
-        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="Transparent" CornerRadius="10" Padding="10">
+        <Frame x:Name="ActionsFrame" IsVisible="False" BackgroundColor="#80000000" CornerRadius="10" Padding="10">
             <StackLayout VerticalOptions="Center" Spacing="20">
                 <Button Background="White"
                         Text="Add to favorites"
                         TextColor="#2d2e37"
+                        WidthRequest="200"
                         FontFamily="Rubik"
                         FontSize="15"
                         CornerRadius="20"
@@ -33,6 +34,7 @@
                 <Button Background="White"
                         Text="Remove from favorites"
                         TextColor="#2d2e37"
+                        WidthRequest="200"
                         FontFamily="Rubik"
                         FontSize="15"
                         CornerRadius="20"

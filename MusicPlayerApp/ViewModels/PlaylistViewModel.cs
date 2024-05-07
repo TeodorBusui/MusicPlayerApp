@@ -81,7 +81,10 @@ namespace MusicPlayerApp.ViewModels
 
             var devices = deviceTask.Result;
 
-            await spotifyService.TransferPlayback(devices.AvailableDevices[0].Id);
+            if (devices.AvailableDevices.Count > 0)
+            {
+                await spotifyService.TransferPlayback(devices.AvailableDevices[0].Id);
+            }
 
             CurrentlyPlayingTrack currentlyPlayingTrack = await spotifyService.GetCurrentlyPlayingTrack();
 
