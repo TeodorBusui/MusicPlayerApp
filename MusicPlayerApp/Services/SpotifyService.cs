@@ -516,8 +516,12 @@ namespace MusicPlayerApp.Services
             string context_uri = $"spotify:playlist:{playlistId}";
 
             PlaylistTracks playlistTracks = await GetPlaylistTracks(playlistId);
-            Offset offset = new Offset();
-            offset.position = 0;
+            Offset offset = new()
+            {
+                position = 0
+            };
+
+            double numberOfTracks;
 
             var request = new
             {
@@ -526,9 +530,18 @@ namespace MusicPlayerApp.Services
                 position_ms = 0
             };
 
+            if(playlistTracks.Total > 100)
+            {
+                numberOfTracks = 100;
+            }
+            else
+            {
+                numberOfTracks = playlistTracks.Total;
+            }
+
             if (currentlyPlayingTrack != null)
             {
-                for(int i = 0; i<playlistTracks.Total; i++)
+                for (int i = 0; i < numberOfTracks; i++)
                 {
                     if (playlistTracks.Items[i].Track.Id == currentlyPlayingTrack.Track.Id)
                     {
